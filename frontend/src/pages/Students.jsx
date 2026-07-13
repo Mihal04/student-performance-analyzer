@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AddStudentForm from "../components/AddStudentForm";
 import StudentTable from "../components/StudentTable";
+import API from "../api/api";
 
 function Students() {
-  const [students] = useState([]);
+  const [students, setStudents] = useState([]);
+
+  const fetchStudents = async () => {
+    try {
+      const res = await API.get("/students");
+      setStudents(res.data.students);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
 
   return (
     <>
@@ -18,7 +32,7 @@ function Students() {
             Student Management
           </h1>
 
-          <AddStudentForm />
+          <AddStudentForm fetchStudents={fetchStudents} />
 
           <StudentTable students={students} />
 
