@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Analyze from "./pages/Analyze";
 import Reports from "./pages/Reports";
 import About from "./pages/About";
+import Students from "./pages/Students";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/analyze" element={<Analyze />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/about" element={<About />} />
+        <Route path="/students" element={<Students />} />
       </Routes>
     </BrowserRouter>
   );
