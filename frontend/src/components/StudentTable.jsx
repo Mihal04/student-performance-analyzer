@@ -1,4 +1,24 @@
-function StudentTable({ students = [] }) {
+import API from "../api/api";
+
+function StudentTable({ students = [], fetchStudents }) {
+
+    const handleDelete = async (id) => {
+  const confirmDelete = window.confirm(
+    "Are you sure you want to delete this student?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    await API.delete(`/students/${id}`);
+
+    alert("Student Deleted Successfully");
+
+    fetchStudents();
+  } catch (error) {
+    alert(error.response?.data?.message || "Delete Failed");
+  }
+};
   return (
     <div className="mt-10 bg-slate-900 rounded-2xl shadow-xl border border-violet-700 overflow-hidden">
       <div className="overflow-x-auto">
@@ -43,9 +63,12 @@ function StudentTable({ students = [] }) {
                       Edit
                     </button>
 
-                    <button className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded">
-                      Delete
-                    </button>
+                    <button
+  onClick={() => handleDelete(student._id)}
+  className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded"
+>
+  Delete
+</button>
                   </td>
                 </tr>
               ))

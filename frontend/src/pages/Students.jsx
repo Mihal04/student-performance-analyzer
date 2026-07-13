@@ -34,7 +34,10 @@ function Students() {
 
           <AddStudentForm fetchStudents={fetchStudents} />
 
-          <StudentTable students={students} />
+          <StudentTable
+  students={students}
+  fetchStudents={fetchStudents}
+/>
 
         </div>
       </div>
